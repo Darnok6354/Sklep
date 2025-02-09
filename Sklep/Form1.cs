@@ -12,16 +12,16 @@ namespace WinFormsApp1
         {
             InitializeComponent();
             InitializeDatabase();
-            LoadShoesFromDatabase();  // Za³adowanie danych o butach z bazy
+            LoadShoesFromDatabase();  
         }
 
-        // Inicjalizacja bazy danych
+        
         private void InitializeDatabase()
         {
-            dbConnection = new SqliteConnection("Data Source=Sklep.db"); // U¿ywamy bazy danych Sklep.db
+            dbConnection = new SqliteConnection("Data Source=Sklep.db"); 
             dbConnection.Open();
 
-            // Zmiana zapytania tworz¹cego tabelê buty
+            
             string createTableQuery = @"
                 CREATE TABLE IF NOT EXISTS buty (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -37,12 +37,12 @@ namespace WinFormsApp1
             }
         }
 
-        // Wczytanie butów z bazy danych
+        
         private void LoadShoesFromDatabase()
         {
             listOfUsers.Items.Clear();
 
-            // Sprawdzenie, czy tabela istnieje
+            
             string checkTableQuery = "SELECT name FROM sqlite_master WHERE type='table' AND name='buty'";
             using (var checkCommand = new SqliteCommand(checkTableQuery, dbConnection))
             {
@@ -50,7 +50,7 @@ namespace WinFormsApp1
 
                 if (result == null)
                 {
-                    // Tabela nie istnieje, wiêc j¹ tworzymy
+                    
                     string createTableQuery = @"
                         CREATE TABLE IF NOT EXISTS buty (
                             Id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -64,11 +64,11 @@ namespace WinFormsApp1
                     {
                         createCommand.ExecuteNonQuery();
                     }
-                    return; // Nie próbujemy wczytaæ danych, bo tabela jest pusta
+                    return; 
                 }
             }
 
-            // Jeœli tabela istnieje, wczytujemy dane
+            
             string selectQuery = "SELECT Id, Marka, Nazwa, Cena, IloscSztuk FROM buty";
             using (var command = new SqliteCommand(selectQuery, dbConnection))
             using (var reader = command.ExecuteReader())
@@ -80,7 +80,7 @@ namespace WinFormsApp1
             }
         }
 
-        // Dodanie buta do bazy po klikniêciu przycisku
+        
         private void addButton_Click(object sender, EventArgs e)
         {
             string marka = markaTextBox.Text.Trim();
@@ -88,7 +88,7 @@ namespace WinFormsApp1
             double cena;
             int iloscSztuk;
 
-            // Sprawdzenie, czy dane s¹ poprawne
+            
             if (string.IsNullOrWhiteSpace(marka) || string.IsNullOrWhiteSpace(nazwa) ||
                 !double.TryParse(cenaTextBox.Text, out cena) || !int.TryParse(iloscTextBox.Text, out iloscSztuk))
             {
@@ -98,7 +98,7 @@ namespace WinFormsApp1
 
             try
             {
-                // Zapytanie do dodania produktu
+               
                 string insertQuery = "INSERT INTO buty (Marka, Nazwa, Cena, IloscSztuk) VALUES (@Marka, @Nazwa, @Cena, @IloscSztuk)";
                 using (var command = new SqliteCommand(insertQuery, dbConnection))
                 {
@@ -109,7 +109,7 @@ namespace WinFormsApp1
                     command.ExecuteNonQuery();
                 }
 
-                LoadShoesFromDatabase();  // Odœwie¿enie listy butów po dodaniu
+                LoadShoesFromDatabase();  
                 markaTextBox.Clear();
                 nazwaTextBox.Clear();
                 cenaTextBox.Clear();
@@ -179,7 +179,7 @@ namespace WinFormsApp1
 
         private void showAllButton_Click(object sender, EventArgs e)
         {
-            LoadShoesFromDatabase(); // Wywo³anie metody ³aduj¹cej wszystkie buty
+            LoadShoesFromDatabase(); 
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -210,8 +210,8 @@ namespace WinFormsApp1
                     }
                 }
 
-                LoadShoesFromDatabase(); // Odœwie¿enie listy butów po usuniêciu
-                idToDeleteTextBox.Clear(); // Czyszczenie pola tekstowego
+                LoadShoesFromDatabase(); 
+                idToDeleteTextBox.Clear(); 
             }
             catch (Exception ex)
             {
@@ -220,7 +220,7 @@ namespace WinFormsApp1
         }
 
 
-        // Zamkniêcie po³¹czenia przy zamykaniu aplikacji
+
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             dbConnection?.Close();
