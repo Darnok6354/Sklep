@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            listOfUsers = new ListBox();
+            ListofBoots = new ListBox();
             markaTextBox = new TextBox();
             nazwaTextBox = new TextBox();
             cenaTextBox = new TextBox();
@@ -60,14 +60,14 @@
             label1.TabIndex = 1;
             label1.Text = "Lista butów";
             // 
-            // listOfUsers
+            // ListofBoots
             // 
-            listOfUsers.FormattingEnabled = true;
-            listOfUsers.ItemHeight = 15;
-            listOfUsers.Location = new Point(43, 144);
-            listOfUsers.Name = "listOfUsers";
-            listOfUsers.Size = new Size(247, 259);
-            listOfUsers.TabIndex = 2;
+            ListofBoots.FormattingEnabled = true;
+            ListofBoots.ItemHeight = 15;
+            ListofBoots.Location = new Point(43, 144);
+            ListofBoots.Name = "Lista butów";
+            ListofBoots.Size = new Size(247, 259);
+            ListofBoots.TabIndex = 2;
             // 
             // markaTextBox
             // 
@@ -241,7 +241,7 @@
             Controls.Add(cenaTextBox);
             Controls.Add(nazwaTextBox);
             Controls.Add(markaTextBox);
-            Controls.Add(listOfUsers);
+            Controls.Add(ListofBoots);
             Controls.Add(label1);
             Controls.Add(markaLabel);
             Controls.Add(nazwaLabel);
@@ -266,7 +266,7 @@
         #endregion
 
         private Label label1;
-        private ListBox listOfUsers;
+        private ListBox ListofBoots;
         private TextBox markaTextBox;
         private TextBox nazwaTextBox;
         private TextBox cenaTextBox;

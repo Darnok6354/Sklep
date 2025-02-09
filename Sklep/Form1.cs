@@ -40,7 +40,7 @@ namespace WinFormsApp1
         
         private void LoadShoesFromDatabase()
         {
-            listOfUsers.Items.Clear();
+            ListofBoots.Items.Clear();
 
             
             string checkTableQuery = "SELECT name FROM sqlite_master WHERE type='table' AND name='buty'";
@@ -75,7 +75,7 @@ namespace WinFormsApp1
             {
                 while (reader.Read())
                 {
-                    listOfUsers.Items.Add($"{reader.GetInt32(0)} - {reader.GetString(1)} {reader.GetString(2)} - {reader.GetDouble(3):C} - {reader.GetInt32(4)} szt.");
+                    ListofBoots.Items.Add($"{reader.GetInt32(0)} - {reader.GetString(1)} {reader.GetString(2)} - {reader.GetDouble(3):C} - {reader.GetInt32(4)} szt.");
                 }
             }
         }
@@ -131,7 +131,7 @@ namespace WinFormsApp1
                 return;
             }
 
-            listOfUsers.Items.Clear();
+            ListofBoots.Items.Clear();
 
             string selectQuery = "SELECT Id, Marka, Nazwa, Cena, IloscSztuk FROM buty WHERE Id = @Id";
             using (var command = new SqliteCommand(selectQuery, dbConnection))
@@ -141,7 +141,7 @@ namespace WinFormsApp1
                 {
                     if (reader.Read())
                     {
-                        listOfUsers.Items.Add($"{reader.GetInt32(0)} - {reader.GetString(1)} {reader.GetString(2)} - {reader.GetDouble(3):C} - {reader.GetInt32(4)} szt.");
+                        ListofBoots.Items.Add($"{reader.GetInt32(0)} - {reader.GetString(1)} {reader.GetString(2)} - {reader.GetDouble(3):C} - {reader.GetInt32(4)} szt.");
                     }
                     else
                     {
@@ -161,7 +161,7 @@ namespace WinFormsApp1
                 return;
             }
 
-            listOfUsers.Items.Clear();
+            ListofBoots.Items.Clear();
 
             string selectQuery = "SELECT Id, Marka, Nazwa, Cena, IloscSztuk FROM buty WHERE Marka LIKE @Marka";
             using (var command = new SqliteCommand(selectQuery, dbConnection))
@@ -171,7 +171,7 @@ namespace WinFormsApp1
                 {
                     while (reader.Read())
                     {
-                        listOfUsers.Items.Add($"{reader.GetInt32(0)} - {reader.GetString(1)} {reader.GetString(2)} - {reader.GetDouble(3):C} - {reader.GetInt32(4)} szt.");
+                        ListofBoots.Items.Add($"{reader.GetInt32(0)} - {reader.GetString(1)} {reader.GetString(2)} - {reader.GetDouble(3):C} - {reader.GetInt32(4)} szt.");
                     }
                 }
             }
